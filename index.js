@@ -60,11 +60,9 @@ const ModeMap = {
             logger.error(err);
             reject(err);
           } else {
-            var memory_object = data.nvidia_smi_log.gpu.fb_memory_usage
-            var used = parseInt(memory_object.used.replace(' MiB', ''))
-            var total = parseInt(memory_object.total.replace(' MiB', ''))
-            var percent = used / total
-            resolve(percent)
+            var memory_object = data.nvidia_smi_log.gpu.utilization.gpu_util;
+            var percent = parseInt(memory_object.replace(' %', ''));
+            resolve(percent/100)
             }
         });
       })
